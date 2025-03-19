@@ -15,7 +15,7 @@ impl Roi {
         let mut data_points = Vec::new();
 
         for row in data.rows().skip(OFFSET) {
-            if let (Some(x), Some(y)) = (row.get(0), row.get(column_number)) {
+            if let (Some(x), Some(y)) = (row.first(), row.get(column_number)) {
                 if let (Some(x), Some(y)) = (x.get_float(), y.get_float()) {
                     data_points.push(DataPoint { time: x, value: y });
                 }
