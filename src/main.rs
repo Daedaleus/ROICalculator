@@ -1,5 +1,5 @@
-mod ui;
 mod model;
+mod ui;
 
 use crate::ui::application::{AppOptions, RoiCalculator};
 
@@ -9,8 +9,6 @@ fn main() -> eframe::Result {
     eframe::run_native(
         "ROI Calculator",
         AppOptions::default().get_native_options(),
-        Box::new(|_cc| {
-            Ok(Box::<RoiCalculator>::default())
-        })
+        Box::new(|_cc| Ok(Box::<RoiCalculator>::default())),
     )
 }

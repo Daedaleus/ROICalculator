@@ -4,7 +4,7 @@ pub struct RoiResult {
     baseline: f64,
     normalized_peak: Option<f64>,
     normalized_baseline: Option<f64>,
-    amplitude: Option<f64>
+    amplitude: Option<f64>,
 }
 
 impl Default for RoiResult {
@@ -14,7 +14,7 @@ impl Default for RoiResult {
             baseline: 0.0,
             normalized_peak: None,
             normalized_baseline: None,
-            amplitude: None
+            amplitude: None,
         }
     }
 }
@@ -24,19 +24,16 @@ impl RoiResult {
         let normalized_peak = peak / baseline * 100.0;
         let normalized_baseline = baseline * 100.0;
         let amplitude = normalized_peak / normalized_baseline;
-        Ok(
-            RoiResult {
-                peak,
-                baseline,
-                normalized_peak: Some(normalized_peak),
-                normalized_baseline: Some(normalized_baseline),
-                amplitude: Some(amplitude)
-            }
-        )
+        Ok(RoiResult {
+            peak,
+            baseline,
+            normalized_peak: Some(normalized_peak),
+            normalized_baseline: Some(normalized_baseline),
+            amplitude: Some(amplitude),
+        })
     }
-    
+
     pub fn get_amplitude(&self) -> Option<f64> {
         self.amplitude
     }
-    
 }

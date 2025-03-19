@@ -1,17 +1,16 @@
-use calamine::{Data, DataType};
 use crate::model::data_point::DataPoint;
 use crate::model::results::RoiResult;
+use calamine::{Data, DataType};
 
 const OFFSET: usize = 3;
 
 #[derive(Clone)]
 pub struct Roi {
     data_points: Vec<DataPoint>,
-    results: Vec<RoiResult>
+    results: Vec<RoiResult>,
 }
 
 impl Roi {
-
     pub fn from_excel(column_number: usize, data: &calamine::Range<Data>) -> Self {
         let mut data_points = Vec::new();
 
@@ -24,16 +23,16 @@ impl Roi {
         }
         Roi {
             data_points,
-            results: Vec::new()
+            results: Vec::new(),
         }
     }
     pub fn new(data_points: Vec<DataPoint>) -> Roi {
         Roi {
             data_points,
-            results: Vec::new()
+            results: Vec::new(),
         }
     }
-    
+
     fn get_max_inbetween(self, start: usize, end: usize) -> f64 {
         let mut max_value = 0.0;
         let start = start + OFFSET;
@@ -42,7 +41,7 @@ impl Roi {
             if self.data_points[i].value() > max_value {
                 max_value = self.data_points[i].value()
             }
-        };
+        }
         max_value
     }
 
@@ -58,14 +57,10 @@ impl Roi {
     pub fn add_result(&mut self, start: usize, end: usize) {
         let peak = self.clone().get_max_inbetween(start, end);
         let baseline = self.clone().calculate_baseline(start);
-        self.results.push(
-            RoiResult::new(peak, baseline).unwrap()
-        )
+        self.results.push(RoiResult::new(peak, baseline).unwrap())
     }
 
     pub fn get_results(&self) -> &Vec<RoiResult> {
         &self.results
     }
-
-
 }
