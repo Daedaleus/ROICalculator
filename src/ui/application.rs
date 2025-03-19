@@ -1,7 +1,7 @@
 use crate::model::application::Application;
 use crate::model::data_set::DataSet;
 use crate::model::roi::Roi;
-use calamine::{open_workbook, Reader, Xlsx};
+use calamine::{Reader, Xlsx, open_workbook};
 use eframe::egui;
 use native_dialog::FileDialog;
 use std::default::Default;
