@@ -60,7 +60,7 @@ impl Default for RoiCalculator {
 impl eframe::App for RoiCalculator {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
-            ui.heading("ROI Calculator");
+            ui.hyperlink_to("Github", "https://github.com/daedaleus");
             ui.label(self.file.to_str().unwrap().to_string());
             if ui.button("Datei laden").clicked() {
                 let path = FileDialog::new().show_open_single_file();
